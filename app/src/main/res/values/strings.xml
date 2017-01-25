@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Alarme SMS</string>
+    <string name="activate">Activate SMS Alarm</string>
+    <string name="rules_list">List of Rules</string>
 </resources>
