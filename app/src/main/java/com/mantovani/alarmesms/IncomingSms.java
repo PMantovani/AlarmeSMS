@@ -36,11 +36,12 @@ public class IncomingSms extends BroadcastReceiver {
                     Log.i("SmsReceiver", "senderNum: "+ senderNum + "; message: " + message);
 
 
-                    Intent intentActivity = new Intent(context, MainActivity.class);
+                    Intent intentActivity = new Intent(context, AlarmAcitivity.class);
                     intentActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intentActivity);
+                    intentActivity.putExtra("SENDER", senderNum);
+                    intentActivity.putExtra("MESSAGE", message);
 
-                    
+                    context.startActivity(intentActivity);
                 }
             }
         } catch (Exception e) {
