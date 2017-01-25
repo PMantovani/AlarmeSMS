@@ -47,7 +47,7 @@ public class AlarmAcitivity extends AppCompatActivity {
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                finishAffinity();
             }
         });
     }

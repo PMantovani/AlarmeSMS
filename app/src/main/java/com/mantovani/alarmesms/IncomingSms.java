@@ -37,7 +37,7 @@ public class IncomingSms extends BroadcastReceiver {
 
 
                     Intent intentActivity = new Intent(context, AlarmAcitivity.class);
-                    intentActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intentActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intentActivity.putExtra("SENDER", senderNum);
                     intentActivity.putExtra("MESSAGE", message);
 
