@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
@@ -28,20 +29,25 @@ public class IncomingSms extends BroadcastReceiver {
 
                 for (int i = 0; i < pdusObj.length; i++) {
 
-//                    SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
+                    //SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
                     SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i], "3gpp");
                     String senderNum = currentMessage.getDisplayOriginatingAddress();
                     String message = currentMessage.getDisplayMessageBody();
 
-                    Log.i("SmsReceiver", "senderNum: "+ senderNum + "; message: " + message);
+                    //Log.i("SmsReceiver", "senderNum: "+ senderNum + "; message: " + message);
 
+                    SharedPreferences prefs =
+                            context.getSharedPreferences("userPrefs", Context.MODE_PRIVATE);
+                    boolean enable = prefs.getBoolean("enable", true);
 
-                    Intent intentActivity = new Intent(context, AlarmAcitivity.class);
-                    intentActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intentActivity.putExtra("SENDER", senderNum);
-                    intentActivity.putExtra("MESSAGE", message);
+                    if (enable) {
+                        Intent intentActivity = new Intent(context, AlarmAcitivity.class);
+                        intentActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intentActivity.putExtra("SENDER", senderNum);
+                        intentActivity.putExtra("MESSAGE", message);
 
-                    context.startActivity(intentActivity);
+                        context.startActivity(intentActivity);
+                    }
                 }
             }
         } catch (Exception e) {
