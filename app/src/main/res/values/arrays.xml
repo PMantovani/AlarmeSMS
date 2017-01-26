@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="rule_type">
+        <item>Phone number</item>
+        <item>Text in message body</item>
+    </string-array>
+</resources>

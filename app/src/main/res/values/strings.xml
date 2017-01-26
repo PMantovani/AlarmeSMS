@@ -2,4 +2,5 @@
     <string name="app_name">Alarme SMS</string>
     <string name="activate">Activate SMS Alarm</string>
     <string name="rules_list">List of Rules</string>
+    <string name="rule_type">Type of rule</string>
 </resources>

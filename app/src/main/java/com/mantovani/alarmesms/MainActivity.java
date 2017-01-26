@@ -1,7 +1,12 @@
 package com.mantovani.alarmesms;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +37,16 @@ public class MainActivity extends AppCompatActivity {
         if (ruleJSON != null) {
             rule.addFromJsonString(ruleJSON);
         }
+
+        // Defines the action when clicking the floating action button
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment dialog = new NewRuleDialog();
+                dialog.show(getFragmentManager(), "dialog");
+            }
+        });
     }
 
 
@@ -47,4 +62,22 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean("enable", enabled).apply();
     }
+
+
+    class NewRuleDialog extends DialogFragment {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle(R.string.rule_type)
+                    .setItems(R.array.rule_type, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // The 'which' argument contains the index position
+                            // of the selected item
+                        }
+                    });
+            return builder.create();
+        }
+    }
 }
+
