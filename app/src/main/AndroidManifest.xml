@@ -29,7 +29,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".AlarmAcitivity"></activity>
+        <activity android:name=".AlarmActivity" />
     </application>
 
 </manifest>

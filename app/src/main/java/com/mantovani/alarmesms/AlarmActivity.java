@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class AlarmAcitivity extends AppCompatActivity {
+public class AlarmActivity extends AppCompatActivity {
 
     private Ringtone ringtone;
     private Button stopButton;
@@ -42,7 +42,7 @@ public class AlarmAcitivity extends AppCompatActivity {
     public void onStopAlarmButtonClick(View v) {
         ringtone.stop();
 
-        stopButton.setText("Close app");
+        stopButton.setText(R.string.close_app);
         stopButton.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.blue));
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override

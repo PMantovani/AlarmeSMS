@@ -2,5 +2,18 @@
     <string name="app_name">Alarme SMS</string>
     <string name="activate">Activate SMS Alarm</string>
     <string name="rules_list">List of Rules</string>
+    <string name="sender_list">List of Senders</string>
+    <string name="pattern_list">List of Patterns</string>
     <string name="rule_type">Type of rule</string>
+    <string name="add_new_sender">Add New Sender</string>
+    <string name="insert_number">Insert number</string>
+    <string name="add_new_pattern">Add New Pattern</string>
+    <string name="insert_pattern">Insert pattern</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="message_from">Message from:</string>
+    <string name="message">Message:</string>
+    <string name="close_app">Close app</string>
+    <string name="stop_alarm">Stop Alarm</string>
+    <string name="delete">delete</string>
 </resources>

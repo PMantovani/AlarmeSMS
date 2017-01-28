@@ -27,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/center_view"
+            android:orientation="vertical"
 
             android:id="@+id/layout_1">
 
@@ -39,8 +40,14 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:background="@color/gray"
 
-                android:text="@string/rules_list"
-                android:id="@+id/sender_list" />
+                android:text="@string/sender_list"
+                android:id="@+id/sender_text" />
+
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sender_list_view"/>
         </LinearLayout>
 
         <!-- Invisible view used only to center the LinearLayouts -->
@@ -54,6 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/center_view"
+            android:orientation="vertical"
 
             android:id="@+id/layout_2">
 
@@ -66,8 +74,13 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:background="@color/gray"
 
-                android:text="@string/rules_list"
-                android:id="@+id/pattern_list" />
+                android:text="@string/pattern_list"
+                android:id="@+id/pattern_text" />
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/pattern_list_view"/>
         </LinearLayout>
     </RelativeLayout>
 

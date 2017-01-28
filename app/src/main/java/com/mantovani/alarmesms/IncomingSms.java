@@ -1,6 +1,5 @@
 package com.mantovani.alarmesms;
 
-import android.app.IntentService;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.Context;
@@ -9,7 +8,6 @@ import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 import android.util.Log;
-import android.widget.Toast;
 
 /**
  * This class is called when a SMS is received
@@ -40,8 +38,15 @@ public class IncomingSms extends BroadcastReceiver {
                             context.getSharedPreferences("userPrefs", Context.MODE_PRIVATE);
                     boolean enable = prefs.getBoolean("enable", true);
 
-                    if (enable) {
-                        Intent intentActivity = new Intent(context, AlarmAcitivity.class);
+                    // Parse json to rule object
+                    Rule rule = new Rule();
+                    String ruleJSON = prefs.getString("rule", null);
+                    if (ruleJSON != null) {
+                        rule.addFromJsonString(ruleJSON);
+                    }
+
+                    if (enable && rule.matchesCriteria(senderNum, message)) {
+                        Intent intentActivity = new Intent(context, AlarmActivity.class);
                         intentActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intentActivity.putExtra("SENDER", senderNum);
                         intentActivity.putExtra("MESSAGE", message);

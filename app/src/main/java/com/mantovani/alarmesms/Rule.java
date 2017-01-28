@@ -9,25 +9,42 @@ import java.util.ArrayList;
  * Defines a rule for triggering the alarm when receiving a SMS
  */
 
-public class Rule {
+class Rule {
 
     private ArrayList<String> listOfSenders;
     private ArrayList<String> listOfPatterns;
 
-    public Rule() {
-
+    Rule() {
+        listOfPatterns = new ArrayList<>();
+        listOfSenders = new ArrayList<>();
     }
 
     public Rule(String json) {
         addFromJsonString(json);
     }
 
-    public void addSender(String sender) {
+    void addSender(String sender) {
         listOfSenders.add(sender);
     }
 
-    public void addPattern(String pattern) {
+    void addPattern(String pattern) {
         listOfPatterns.add(pattern);
+    }
+
+    void deleteSender(int position) {
+        listOfSenders.remove(position);
+    }
+
+    void deletePattern(int position) {
+        listOfPatterns.remove(position);
+    }
+
+    ArrayList<String> getListOfSenders() {
+        return listOfSenders;
+    }
+
+    ArrayList<String> getListOfPatterns() {
+        return listOfPatterns;
     }
 
     public void clearRules() {
@@ -41,9 +58,12 @@ public class Rule {
      * @param message SMS body message
      * @return true if sender and message are contained in the rule
      */
-    public boolean matchesCriteria(String sender, String message) {
+    boolean matchesCriteria(String sender, String message) {
+        message = message.toLowerCase();
         if (listOfSenders.contains(sender)) {
             for (String pattern : listOfPatterns) {
+                pattern = pattern.toLowerCase();
+
                 // Checks if pattern is a substring of the message
                 if (message.contains(pattern)) {
                     return true;
@@ -57,7 +77,7 @@ public class Rule {
      * Converts the internal attributes to a string representation of the JSON
      * @return string representation of the JSON
      */
-    public String convertToJsonString() {
+    String convertToJsonString() {
         try {
             JSONObject jsonObject = new JSONObject();
             JSONArray arrayOfSenders = new JSONArray(listOfSenders);
@@ -78,7 +98,7 @@ public class Rule {
      * Gets a string representation of a JSON and add it to the internal object attributes
      * @param json a string representation of a json
      */
-    public void addFromJsonString(String json) {
+    void addFromJsonString(String json) {
         try {
             JSONObject jsonObject = new JSONObject(json);
             JSONArray arrayOfSenders = jsonObject.getJSONArray("listOfSenders");
