@@ -7,10 +7,11 @@ import android.support.v4.content.ContextCompat;
 
 /**
  * Created by Mantovani on 25-Jan-17.
+ * Utility methods for app
  */
 
-public class Utilities {
-    public static boolean askForPermissionIfNeeded (Activity activity, String permission) {
+class Utilities {
+    static boolean askForPermissionIfNeeded (Activity activity, String permission) {
         // requestCode is only used in implementation of onRequestPermissionResult, which is not
         // used here. Therefore, a simple constant is used
         final int requestCode = 1;

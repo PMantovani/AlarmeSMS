@@ -32,13 +32,19 @@ class CustomAdapter extends ArrayAdapter<String> {
     @Override @NonNull
     public View getView(final int position, View view, @NonNull ViewGroup parent) {
         LayoutInflater inflater=context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.rule_item, null, true);
+        View rowView = view;
 
-        TextView txt = (TextView) rowView.findViewById(R.id.text_view);
-        txt.setText(item.get(position));
+        if (rowView == null) {
+            rowView = inflater.inflate(R.layout.rule_item, parent, false);
+            ViewHolder holder = new ViewHolder();
+            holder.delete = (ImageView) rowView.findViewById(R.id.delete_img);
+            holder.text = (TextView) rowView.findViewById(R.id.text_view);
+            rowView.setTag(holder);
+        }
 
-        ImageView delete = (ImageView) rowView.findViewById(R.id.delete_img);
-        delete.setOnClickListener(new View.OnClickListener() {
+        ViewHolder holder = (ViewHolder) rowView.getTag();
+        holder.text.setText(item.get(position));
+        holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Removes item from list
@@ -62,5 +68,10 @@ class CustomAdapter extends ArrayAdapter<String> {
         });
 
         return rowView;
+    }
+
+    static class ViewHolder {
+        public ImageView delete;
+        public TextView text;
     }
 }

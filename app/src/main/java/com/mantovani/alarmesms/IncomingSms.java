@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
@@ -25,33 +26,42 @@ public class IncomingSms extends BroadcastReceiver {
             if (bundle != null) {
                 final Object[] pdusObj = (Object[]) bundle.get("pdus");
 
-                for (int i = 0; i < pdusObj.length; i++) {
+                if (pdusObj != null) {
+                    for (Object aPdusObj : pdusObj) {
 
-                    //SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
-                    SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i], "3gpp");
-                    String senderNum = currentMessage.getDisplayOriginatingAddress();
-                    String message = currentMessage.getDisplayMessageBody();
+                        SmsMessage currentMessage;
 
-                    //Log.i("SmsReceiver", "senderNum: "+ senderNum + "; message: " + message);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            String format = bundle.getString("format");
+                            currentMessage = SmsMessage.createFromPdu((byte[]) aPdusObj, format);
+                        } else {
+                            //noinspection deprecation
+                            currentMessage = SmsMessage.createFromPdu((byte[]) aPdusObj);
+                        }
+                        String senderNum = currentMessage.getDisplayOriginatingAddress();
+                        String message = currentMessage.getDisplayMessageBody();
 
-                    SharedPreferences prefs =
-                            context.getSharedPreferences("userPrefs", Context.MODE_PRIVATE);
-                    boolean enable = prefs.getBoolean("enable", true);
+                        //Log.i("SmsReceiver", "senderNum: "+ senderNum + "; message: " + message);
 
-                    // Parse json to rule object
-                    Rule rule = new Rule();
-                    String ruleJSON = prefs.getString("rule", null);
-                    if (ruleJSON != null) {
-                        rule.addFromJsonString(ruleJSON);
-                    }
+                        SharedPreferences prefs =
+                                context.getSharedPreferences("userPrefs", Context.MODE_PRIVATE);
+                        boolean enable = prefs.getBoolean("enable", true);
 
-                    if (enable && rule.matchesCriteria(senderNum, message)) {
-                        Intent intentActivity = new Intent(context, AlarmActivity.class);
-                        intentActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intentActivity.putExtra("SENDER", senderNum);
-                        intentActivity.putExtra("MESSAGE", message);
+                        // Parse json to rule object
+                        Rule rule = new Rule();
+                        String ruleJSON = prefs.getString("rule", null);
+                        if (ruleJSON != null) {
+                            rule.addFromJsonString(ruleJSON);
+                        }
 
-                        context.startActivity(intentActivity);
+                        if (enable && rule.matchesCriteria(senderNum, message)) {
+                            Intent intentActivity = new Intent(context, AlarmActivity.class);
+                            intentActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intentActivity.putExtra("SENDER", senderNum);
+                            intentActivity.putExtra("MESSAGE", message);
+
+                            context.startActivity(intentActivity);
+                        }
                     }
                 }
             }

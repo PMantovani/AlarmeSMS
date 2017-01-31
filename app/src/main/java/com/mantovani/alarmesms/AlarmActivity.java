@@ -3,6 +3,7 @@ package com.mantovani.alarmesms;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -47,7 +48,12 @@ public class AlarmActivity extends AppCompatActivity {
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finishAffinity();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    finishAffinity();
+                }
+                else {
+                    finish();
+                }
             }
         });
     }
