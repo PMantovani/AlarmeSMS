@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Alarme SMS</string>
+    <string name="activate">Ativar Alarme SMS</string>
+    <string name="add_new_pattern">Adicionar Novo Padrão</string>
+    <string name="add_new_sender">Adicionar Novo Número</string>
+    <string name="cancel">Cancelar</string>
+    <string name="close_app">Fechar app</string>
+    <string name="delete">deletar</string>
+    <string name="insert_number">Adicionar Número</string>
+    <string name="insert_pattern">Adicionar Padrão</string>
+    <string name="message">Mensagem:</string>
+    <string name="message_from">Remetente:</string>
+    <string name="ok">OK</string>
+    <string name="pattern_list">Lista de Padrões</string>
+    <string name="rule_type">Tipo de regra</string>
+    <string name="sender_list">Lista de Remetentes</string>
+    <string name="stop_alarm">Parar Alarme</string>
+</resources>
