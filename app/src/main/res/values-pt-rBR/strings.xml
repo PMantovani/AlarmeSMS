@@ -16,4 +16,5 @@
     <string name="rule_type">Tipo de regra</string>
     <string name="sender_list">Lista de Remetentes</string>
     <string name="stop_alarm">Parar Alarme</string>
+    <string name="rules_list">Lista de Regras</string>
 </resources>

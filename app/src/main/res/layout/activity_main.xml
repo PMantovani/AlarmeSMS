@@ -19,70 +19,26 @@
         android:onClick="onEnableAlarmToggle"
         android:id="@+id/enable_switch" />
 
-    <RelativeLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@id/enable_switch">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/center_view"
-            android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:background="@color/gray"
+        android:layout_below="@+id/enable_switch"
 
-            android:id="@+id/layout_1">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:background="@color/gray"
-
-                android:text="@string/sender_list"
-                android:id="@+id/sender_text" />
+        android:text="@string/rules_list"
+        android:id="@+id/rules_text" />
 
 
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/sender_list_view"/>
-        </LinearLayout>
-
-        <!-- Invisible view used only to center the LinearLayouts -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_centerVertical="true"
-            android:id="@+id/center_view"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/center_view"
-            android:orientation="vertical"
-
-            android:id="@+id/layout_2">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:background="@color/gray"
-
-                android:text="@string/pattern_list"
-                android:id="@+id/pattern_text" />
-
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/pattern_list_view"/>
-        </LinearLayout>
-    </RelativeLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rules_text"
+        android:id="@+id/sender_list_view"
+        />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

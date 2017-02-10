@@ -1,6 +1,5 @@
 package com.mantovani.alarmesms;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
